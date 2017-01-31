@@ -6,8 +6,8 @@
   <title>区块链基础技术——哈希函数 | 三言两语</title>
   <meta name="author" content="peer2peer">
   
-  <meta name="description" content="大学学习数据结构时遇到一种很有意思的数据结构，哈希表，最吸引人的特性就是查找时间复杂度为\(O(1)\)（假定哈希函数不发生哈希碰撞）。哈希表是哈希函数最主要的应用领域。哈希函数也是区块链的基础技术之一，确切地说应该叫加密哈希函数（Cryptographic Hash Function）。
-哈希函数">
+  <meta name="description" content="学习数据结构时遇到一种很有意思的数据结构，哈希表，最吸引人的特性就是查找时间复杂度为\(O(1)\)（假定哈希函数不发生哈希碰撞），大大优于常规的数据结构，如链表、树等。哈希表是哈希函数最主要的应用领域。哈希函数也是区块链的基础技术之一。
+哈希函数就是一个数学函数，它能够将任意规模大小的数据映射到固">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -69,12 +69,12 @@
 	
 
 	  <!-- content -->
-	  <p>大学学习数据结构时遇到一种很有意思的数据结构，哈希表，最吸引人的特性就是查找时间复杂度为\(O(1)\)（假定哈希函数不发生哈希碰撞）。哈希表是哈希函数最主要的应用领域。哈希函数也是区块链的基础技术之一，确切地说应该叫加密哈希函数（Cryptographic Hash Function）。</p>
+	  <p>学习数据结构时遇到一种很有意思的数据结构，哈希表，最吸引人的特性就是查找时间复杂度为\(O(1)\)（假定哈希函数不发生哈希碰撞），大大优于常规的数据结构，如链表、树等。哈希表是哈希函数最主要的应用领域。哈希函数也是区块链的基础技术之一。</p>
 <p>哈希函数就是一个数学函数，它能够将任意规模大小的数据映射到固定规模大小（如256位）的数据。哈希函数的返回值称作哈希值，哈希码，摘要或者简称哈希。最简单的，\(f(x)=x \bmod 2\)就可以看作一个哈希函数，它将整数根据其奇偶性映射到了1或0。对这个简单的哈希函数，如果有了\(f(x)\)的值，即1或0，我们很容易就可以找到一个整数y，即只要与x奇偶相同，即可使得\(f(x) == f(y)\)；而且，对于所有偶数的哈希值都相同，所有奇数的哈希值也都相同，这就发生了<strong>哈希碰撞</strong>，即对于两个不同的数，\(x\)和\(y\)，其哈希值相等，即\(f(x) == f(y)\)。</p>
-<h3 id="简单哈希算法"><a href="#简单哈希算法" class="headerlink" title="简单哈希算法"></a>简单哈希算法</h3><p>除法<br>平方    </p>
-<h3 id="哈希碰撞"><a href="#哈希碰撞" class="headerlink" title="哈希碰撞"></a>哈希碰撞</h3><p>王小云</p>
-<h3 id="常用哈希算法"><a href="#常用哈希算法" class="headerlink" title="常用哈希算法"></a>常用哈希算法</h3><p>SHA-1<br>MD5<br>SHA-256<br>RIPEMD-160<br>Scrypt</p>
-<h3 id="哈希算法组合使用"><a href="#哈希算法组合使用" class="headerlink" title="哈希算法组合使用"></a>哈希算法组合使用</h3><h4 id="串联组合"><a href="#串联组合" class="headerlink" title="串联组合"></a>串联组合</h4><h4 id="并联组合"><a href="#并联组合" class="headerlink" title="并联组合"></a>并联组合</h4>	  
+<h2 id="简单哈希算法"><a href="#简单哈希算法" class="headerlink" title="简单哈希算法"></a>简单哈希算法</h2><p>除法<br>平方    </p>
+<h2 id="加密哈希函数（Cryptographic-Hash-Function）"><a href="#加密哈希函数（Cryptographic-Hash-Function）" class="headerlink" title="加密哈希函数（Cryptographic Hash Function）"></a>加密哈希函数（Cryptographic Hash Function）</h2><h2 id="常用哈希算法"><a href="#常用哈希算法" class="headerlink" title="常用哈希算法"></a>常用哈希算法</h2><p>SHA-1<br>MD5<br>SHA-256<br>RIPEMD-160<br>Scrypt</p>
+<h2 id="哈希碰撞"><a href="#哈希碰撞" class="headerlink" title="哈希碰撞"></a>哈希碰撞</h2><p>王小云</p>
+<h2 id="哈希算法组合使用"><a href="#哈希算法组合使用" class="headerlink" title="哈希算法组合使用"></a>哈希算法组合使用</h2><h3 id="串联组合"><a href="#串联组合" class="headerlink" title="串联组合"></a>串联组合</h3><h3 id="并联组合"><a href="#并联组合" class="headerlink" title="并联组合"></a>并联组合</h3>	  
 
 	  <div>
   		<center>
