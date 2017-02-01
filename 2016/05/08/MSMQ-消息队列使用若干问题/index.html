@@ -104,7 +104,7 @@
 数据结构采用C#的struct/class方式定义。
 
 想到的方案有Socket，消息队列等。Socket实现略显复杂，需要考">
-<meta property="og:updated_time" content="2017-02-01T11:52:47.352Z">
+<meta property="og:updated_time" content="2017-02-01T11:55:43.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MSMQ消息队列使用若干问题">
 <meta name="twitter:description" content="需要实现互联网上两个C#程序间的数据交换。
@@ -384,16 +384,16 @@
 <li>创建对应远程消息队列的对象；</li>
 <li>发送消息对象。</li>
 </ol>
-<p>public class Record<br>{<br>    public int x;<br>    public string[] y;<br>}</p>
+<p>`<br>public class Record<br>{<br>    public int x;<br>    public string[] y;<br>}</p>
 <p>string json = …;<br>Record record = Newtonsoft.Json.JsonConvert.DeserializeObject<record>(json);<br>…<br>mq = new MessageQueue(“FormatName:Direct=TCP:135.101.101.101\private$\MyMSMQ”);<br>mq.Formatter = new BinaryMessageFormatter();</record></p>
-<p>mq.Send(record, “Object message”);</p>
+<p>mq.Send(record, “Object message”);<br>`</p>
 <h3 id="使用C-程序（B方）从远程MSMQ私有队列接收消息"><a href="#使用C-程序（B方）从远程MSMQ私有队列接收消息" class="headerlink" title="使用C#程序（B方）从远程MSMQ私有队列接收消息"></a>使用C#程序（B方）从远程MSMQ私有队列接收消息</h3><ol>
 <li>C#项目中添加引用，添加由A方提供的包含Record定义的DLL - MyDLL.dll；</li>
 <li>创建对应远程消息队列的对象；</li>
 <li>从该远程消息队列接收消息，消息体类型为C# Record类的实例record。</li>
 </ol>
-<p>mq = new MessageQueue(“FormatName:Direct=TCP:135.101.101.101\private$\MyMSMQ”);<br>mq.Formatter = new BinaryMessageFormatter();</p>
-<p>try<br>{<br>    System.Messaging.Message m = mq.Receive();<br>    Record record = (MyDLL.Record)m.Body;<br>}<br>catch (MessageQueueException ee)<br>{<br>    Console.Write(ee.ToString());<br>}<br>catch (Exception eee)<br>{<br>    Console.Write(eee.ToString());<br>}<br>finally<br>{<br>    mq.Close();<br>}</p>
+<p>`<br>mq = new MessageQueue(“FormatName:Direct=TCP:135.101.101.101\private$\MyMSMQ”);<br>mq.Formatter = new BinaryMessageFormatter();</p>
+<p>try<br>{<br>    System.Messaging.Message m = mq.Receive();<br>    Record record = (MyDLL.Record)m.Body;<br>}<br>catch (MessageQueueException ee)<br>{<br>    Console.Write(ee.ToString());<br>}<br>catch (Exception eee)<br>{<br>    Console.Write(eee.ToString());<br>}<br>finally<br>{<br>    mq.Close();<br>}<br>`</p>
 <h3 id="主要问题"><a href="#主要问题" class="headerlink" title="主要问题"></a>主要问题</h3><ol>
 <li>远程MSMQ队列的标识：”FormatName:Direct=TCP:IpAddr\private$\QueueName”</li>
 <li>当从远程MSMQ私有队列接收消息时，报出accessdenied的exception。原来是远程消息队列的机器中，需要在计算机管理 -&gt; 服务和应用程序 -&gt; 消息队列 点击右键，属性 -&gt; 服务器安全性 页，去掉禁用未经身份验证的RPC调用。那前面发送消息为何成功呢？因为send和receive采用不同的协议，receive是采用RPC调用的方式。</li>
