@@ -104,7 +104,7 @@
 数据结构采用C#的struct/class方式定义。
 
 想到的方案有Socket，消息队列等。Socket实现略显复杂，需要考">
-<meta property="og:updated_time" content="2017-01-28T15:36:20.956Z">
+<meta property="og:updated_time" content="2017-02-01T06:51:01.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MSMQ消息队列使用若干问题">
 <meta name="twitter:description" content="需要实现互联网上两个C#程序间的数据交换。
@@ -376,6 +376,7 @@
 <li>数据结构采用C#的struct/class方式定义。</li>
 </ol>
 <p>想到的方案有Socket，消息队列等。Socket实现略显复杂，需要考虑到消息缓存队列、采集数据、维护连接等，包括多线程同步等问题，决定采用消息队列，实现起来会简化很多问题，MSMQ成了自然之选。</p>
+<a id="more"></a>
 <h3 id="使用C-程序（A方）往远程MSMQ私有队列发送消息"><a href="#使用C-程序（A方）往远程MSMQ私有队列发送消息" class="headerlink" title="使用C#程序（A方）往远程MSMQ私有队列发送消息"></a>使用C#程序（A方）往远程MSMQ私有队列发送消息</h3><ol>
 <li>根据采集到的json内容格式，定义相关数据结构，即C#的class，Record；</li>
 <li>将采集到的json内容反序列化到C#的对象record（Record的实例）；</li>
