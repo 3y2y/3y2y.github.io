@@ -104,7 +104,7 @@
 数据结构采用C#的struct/class方式定义。
 
 想到的方案有Socket，消息队列等。Socket实现略显复杂，需要考">
-<meta property="og:updated_time" content="2017-02-01T06:51:01.008Z">
+<meta property="og:updated_time" content="2017-02-01T11:48:48.157Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MSMQ消息队列使用若干问题">
 <meta name="twitter:description" content="需要实现互联网上两个C#程序间的数据交换。
@@ -383,19 +383,31 @@
 <li>选取record的部分字段，赋值给另一个表示消息的C#对象recordmessage；</li>
 <li>创建对应远程消息队列的对象；</li>
 <li><p>发送消息对象。</p>
-<p> public class Record<br> {<br> public int x;<br> public string[] y;<br> }</p>
+<p> `public class Record<br> {</p>
+<pre><code>public int x;
+public string[] y; 
+</code></pre><p> }</p>
 <p> string json = …;<br> Record record = Newtonsoft.Json.JsonConvert.DeserializeObject<record>(json);</record></p>
 <p> …</p>
 <p> mq = new MessageQueue(“FormatName:Direct=TCP:135.101.101.101\private$\MyMSMQ”);<br> mq.Formatter = new BinaryMessageFormatter();</p>
-<p> mq.Send(record, “Object message”);</p>
+<p> mq.Send(record, “Object message”);<br>`</p>
 </li>
 </ol>
 <h3 id="使用C-程序（B方）从远程MSMQ私有队列接收消息"><a href="#使用C-程序（B方）从远程MSMQ私有队列接收消息" class="headerlink" title="使用C#程序（B方）从远程MSMQ私有队列接收消息"></a>使用C#程序（B方）从远程MSMQ私有队列接收消息</h3><ol>
 <li>C#项目中添加引用，添加由A方提供的包含Record定义的DLL - MyDLL.dll；</li>
 <li>创建对应远程消息队列的对象；</li>
 <li><p>从该远程消息队列接收消息，消息体类型为C# Record类的实例record。</p>
-<p> mq = new MessageQueue(“FormatName:Direct=TCP:135.101.101.101\private$\MyMSMQ”);<br> mq.Formatter = new BinaryMessageFormatter();</p>
-<p> try<br> {<br> System.Messaging.Message m = mq.Receive();<br> Record record = (MyDLL.Record)m.Body;<br> }<br> catch (MessageQueueException ee)<br> {<br> Console.Write(ee.ToString());<br> }<br> catch (Exception eee)<br> {<br> Console.Write(eee.ToString());<br> }<br> finally<br> {<br> mq.Close();<br> }</p>
+<p> `mq = new MessageQueue(“FormatName:Direct=TCP:135.101.101.101\private$\MyMSMQ”);<br> mq.Formatter = new BinaryMessageFormatter();</p>
+<p> try<br> {</p>
+<pre><code>System.Messaging.Message m = mq.Receive();
+Record record = (MyDLL.Record)m.Body;
+</code></pre><p> }<br> catch (MessageQueueException ee)<br> {</p>
+<pre><code>Console.Write(ee.ToString());
+</code></pre><p> }<br> catch (Exception eee)<br> {</p>
+<pre><code>Console.Write(eee.ToString());
+</code></pre><p> }<br> finally<br> {</p>
+<pre><code>mq.Close();
+</code></pre><p> }`</p>
 </li>
 </ol>
 <h3 id="主要问题"><a href="#主要问题" class="headerlink" title="主要问题"></a>主要问题</h3><ol>
